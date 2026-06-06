@@ -1,15 +1,6 @@
 # AI IDE Template
 
-A Next.js App Router template with AI SDK streaming chat, shadcn/ui + AI Elements UI, and VPS deployment via Podman + Cloudflare Tunnel.
-
-## Quick start
-
-```bash
-pnpm install
-pnpm dev
-```
-
-Open `http://localhost:3000`.
+A starter template for AI-assisted development with standardized rules, skills, and OpenSpec workflows.
 
 ## Clone this template
 
@@ -17,73 +8,23 @@ Open `http://localhost:3000`.
 gh repo create my-new-repo --template uratmangun/ai-ide-template --private --clone
 ```
 
-## Scripts
+## What's included
 
-- `pnpm dev` – Next.js dev server
-- `pnpm build` – production build
-- `pnpm start` – run production server
-- `pnpm lint` – ESLint
-- `pnpm typecheck` – TypeScript check
+- `.agents/skills/` — agent skills for AI SDK, Cloudflare, OpenSpec, and more
+- `.cursor/` and `.opencode/` — IDE rules and commands
+- `openspec/` — change proposals and archived specs
+- `scripts/` — skill lock and harness utilities
 
-## Docker (standalone)
+## Skills
 
-```bash
-podman build -t ai-ide-template:latest .
-podman run --rm -p 3000:3000 ai-ide-template:latest
-```
-
-## VPS Podman quadlet
-
-Create `/etc/containers/systemd/ai-ide-template.container`:
-
-```ini
-[Unit]
-Description=AI IDE Template (Next.js)
-After=network-online.target
-Wants=network-online.target
-
-[Container]
-Image=localhost/ai-ide-template:latest
-ContainerName=ai-ide-template
-PublishPort=3000:3000
-Environment=NODE_ENV=production
-Restart=always
-
-[Service]
-Restart=always
-TimeoutStartSec=900
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Then:
+Update skill harnesses:
 
 ```bash
-sudo systemctl daemon-reload
-sudo systemctl enable --now ai-ide-template.service
-curl -I http://127.0.0.1:3000
+./scripts/skills-update-harnesses.sh
 ```
 
-## Cloudflare Tunnel ingress
-
-Add ingress in your `cloudflared` config:
-
-```yaml
-ingress:
-  - hostname: ai-template.uratmangun.ovh
-    service: http://127.0.0.1:3000
-  - service: http_status:404
-```
-
-Apply DNS route once:
+Create or refresh the skills lock file:
 
 ```bash
-cloudflared tunnel route dns <TUNNEL_NAME_OR_ID> ai-template.uratmangun.ovh
-```
-
-Restart tunnel service/container and verify:
-
-```bash
-curl -I https://ai-template.uratmangun.ovh
+./scripts/skills-create-lock.sh
 ```
