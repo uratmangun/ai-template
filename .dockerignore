@@ -1,0 +1,11 @@
+node_modules
+.next
+.git
+.cursor
+.agents
+.wrangler
+coverage
+*.log
+.DS_Store
+.env*
+!.env.example
