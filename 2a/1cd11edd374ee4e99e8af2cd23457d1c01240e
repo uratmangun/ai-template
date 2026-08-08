@@ -1,0 +1,14 @@
+README.md
+  h_507437e9269982 8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "2a1cd11edd374ee4e99e8af2cd23457d1c01240e",
+  "prompts": {},
+  "humans": {
+    "h_507437e9269982": {
+      "author": "uratmangun <17805677+uratmangun@users.noreply.github.com>"
+    }
+  }
+}
