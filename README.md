@@ -5,7 +5,7 @@ A starter template for AI-assisted development with standardized rules, skills, 
 ## Clone this template
 
 ```bash
-gh repo create my-new-repo --template uratmangun/ai-ide-template --private --clone
+gh repo create my-new-repo --template uratmangun/ai-template --private --clone
 ```
 
 ## What's included
