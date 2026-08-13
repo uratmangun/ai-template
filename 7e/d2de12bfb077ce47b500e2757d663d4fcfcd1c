@@ -1,0 +1,19 @@
+.agents/skills/webauthx/examples/hono/.env.example
+  s_ffb7798645c72b::t_415d1a52b16c3d 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "7ed2de12bfb077ce47b500e2757d663d4fcfcd1c",
+  "prompts": {},
+  "sessions": {
+    "s_ffb7798645c72b": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "e5a922d0-6805-4b1c-b989-e1e25718bf6e",
+        "model": "default"
+      },
+      "human_author": "uratmangun <17805677+uratmangun@users.noreply.github.com>"
+    }
+  }
+}
