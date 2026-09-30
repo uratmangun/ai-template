@@ -1,0 +1,71 @@
+---
+description: "Dev/test servers via portless HTTPS in LAN mode; single-host URLs mirroring prod"
+---
+
+# Dev / Test Servers (portless, HTTPS, LAN)
+
+Whenever the user says "start the dev server" or "start the test server":
+never hand them a raw `host:port`. Serve everything through portless in
+LAN mode and give the `https://<app>.local/…` address, reachable from this
+machine and every device on the LAN/tailnet. Prefer the same single-host
+model as prod: UI + API on ONE host — no separate API hostname. The app's
+routes (`/`, `/settings`, …) work identically in dev and prod.
+
+## One-time setup
+
+- `npm install -g portless`, `portless trust` (local CA in system store)
+- Browser trust for other devices: install `~/.portless/ca.pem` as a
+  trusted CA on the device (Android: Settings → Security → Install from
+  storage; iOS: install profile + enable full trust). First visit warns
+  until then.
+
+## Start (exact commands)
+
+```bash
+# 1. proxy with LAN mode: binds 0.0.0.0:443 (needs sudo once) so .local
+#    names work across the network. loopback-only without --lan.
+portless proxy stop && portless proxy start --lan
+
+# 2. register memorable names (NOT <name>.localhost — portless publishes
+#    those to mDNS as <name>.localhost.local, which nobody can remember).
+#    single-host: point <app>.local at the dev-server (e.g. Vite) port.
+#    The dev server proxies /api + /ws to the backend, and prod's server
+#    serves UI + API on one port too, so the test URL mirrors prod.
+portless alias <app>.local <dev-server-port>
+```
+
+## Canonical dev/test names (mirror prod: one host)
+
+- UI = API host: `https://<app>.local/` plus the app's own routes —
+  exactly like prod's single origin.
+- No separate `<app>api.local`: the dev server proxies `/api` + `/ws` to
+  the backend.
+- Aliases live in `~/.portless` and survive proxy restarts; re-register
+  them whenever the underlying ports change.
+
+## SPA / client-side routes
+
+- Deep links and refresh must serve `index.html` with a 200. If the
+  backend uses a static-file `not_found_service` fallback it may return
+  the index body but keep a 404 status — fine for browsers, but `curl`
+  checks should expect 200 only on explicitly registered routes.
+
+## Gotchas (learned the hard way)
+
+- Vite 5 has no `--allowedHosts` CLI flag (v6+ does). For `.local`
+  hostnames add `allowedHosts: true` under `server:` in the Vite config
+  (temp test edit — revert before commit).
+- Dev-server `server.proxy` `/api` + `/ws` targets must point at the
+  *backend* port in use; fix before starting it or API calls 404/stall.
+- No dedicated `/health` route is common — a 404 there often means the
+  server *is* answering. Health-check against a real API endpoint instead.
+- Orca's embedded browser (Electron) does not trust the portless CA even
+  after `~/.pki/nssdb` install → blank page. Verify via `curl -sk` and
+  the user's own system-Chromium browser instead.
+- `.localhost` names resolve only on this machine; `.local` needs avahi
+  on the server side and mDNS working on the client (Android is flaky —
+  fall back to `https://<server-host>:<port>` via MagicDNS).
+- Portless cert SANs cover `<name>.local` + `*.local`. `openssl s_client
+  -connect <name>.local:443 -servername <name>.local` verifies the chain.
+- Revert to loopback-only: `portless proxy stop && portless proxy start`
+  (no `--lan`).

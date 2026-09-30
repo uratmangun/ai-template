@@ -29,6 +29,11 @@ When writing or refactoring React components, adding `useEffect`, or reviewing e
 When writing commit messages:
 @.opencode/rules/commit-message-conventions.mdc
 
+### Dev / Test Servers
+
+When starting a dev/test server, or configuring/troubleshooting portless HTTPS + LAN access:
+@.opencode/rules/dev-test-servers.mdc
+
 ## General Guidelines
 
 - Always check for relevant rules before performing tasks
