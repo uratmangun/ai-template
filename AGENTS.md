@@ -31,7 +31,7 @@ When writing commit messages:
 
 ### Dev / Test Servers
 
-When starting a dev/test server, or configuring/troubleshooting portless HTTPS + LAN access:
+When starting a dev/test server, or configuring/troubleshooting lanpub/lanproxy HTTPS + LAN access:
 @.opencode/rules/dev-test-servers.mdc
 
 ## General Guidelines
