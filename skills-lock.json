@@ -79,6 +79,12 @@
       "skillPath": "skills/hono/SKILL.md",
       "computedHash": "220e5e1b12bbaeec49ec362b6e2262d77632d0536e9758bba9acbbc323fef990"
     },
+    "lobstercash": {
+      "source": "Crossmint/lobstercash-cli-skills",
+      "sourceType": "github",
+      "skillPath": "skills/SKILL.md",
+      "computedHash": "af3feaf0903b945d4cd3029614e2cc24e0928df0f65650f33fff8381cb581475"
+    },
     "mcporter": {
       "source": "steipete/clawdis",
       "sourceType": "github",

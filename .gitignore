@@ -6,3 +6,7 @@ coverage/
 tsconfig.tsbuildinfo
 .env*
 !.env.example
+
+# machine-local state
+.cloudflare/
+config/mcporter.json
