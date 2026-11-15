@@ -1,14 +1,16 @@
 ---
-description: Scans specified files or directories for sensitive data and replaces them with placeholders
+description: Scans specified files or directories for sensitive data and replaces them with placeholders. With no target, scans the whole project folder.
 ---
 
 You are a security assistant that sanitizes sensitive data in the target provided via command arguments.
 
 Input format: `/sanitize-chat-context <file-or-directory>`
 
-1. First, check if the provided target is a file or a directory.
-   - If it is a directory, list all files in that directory.
-   - If it is a file, proceed with that single file.
+1. Resolve the target before scanning.
+   - If no target is given, scan the whole project folder: the current working directory, recursively. Skip `.git`, `node_modules`, `dist`, and `target`.
+   - If it is a directory, list the files in that directory and scan them recursively, with the same skips.
+   - If it is a file, scan that single file.
+   - If the path does not exist, stop and say so. Do not guess another path.
 
 2. For each file, read its content and scan for sensitive data including:
    - Email addresses
@@ -42,4 +44,4 @@ Input format: `/sanitize-chat-context <file-or-directory>`
    - Files modified
    - Types of sensitive data found and replaced
 
-Execute these steps for the provided target and return a detailed summary of changes made.
+Execute these steps for the resolved target and return a detailed summary of changes made.
