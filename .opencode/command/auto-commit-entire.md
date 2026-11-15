@@ -48,26 +48,15 @@ Rules:
 8. Never add `Made-with: Cursor`
 9. For a breaking change, add `!` after the type or scope and a `BREAKING CHANGE:` footer
 
-5. Mask the session before the commit is created. The commit hook stores the session in a checkpoint, and a later push can upload it. Unmasked text must not be committed or pushed.
+5. Commit with `git commit -m "<message>"`. If the hook asks whether to link this commit to session context, answer yes for this commit only. Do not change `commit_linking`. Confirm `git log -1 --format=%B` contains an `Entire-Checkpoint` trailer. If it does not, stop before any push and say the session was not linked.
 
-   - Run `entire session current --json`. Use that session only when `resolution` is `caller-env` or `ancestry`. Any other resolution is not this session: stop.
-   - Read it with `entire session info <id> --json` and `entire session info <id> --transcript`.
-   - Mask every prompt, reply, and tool text through the magpie-hostinger Magpie, using the Entire sessions rule in `~/.config/opencode/AGENTS.md`. Read the provider `baseURL` from `~/.config/opencode/opencode.json`. Derive the web address by changing its port label from `3425-` to `3430-` and removing the `/v1` suffix. `POST /api/masking/preview` with JSON `{"text":"..."}`. The model gateway key does not authorize it. Sign in with the Magpie web key cookie from that rule. Use `MAGPIE_WEB_KEY` when it is already set; otherwise load `~/.config/magpie/web.env`. If that file is missing or the key is empty, stop and ask for it. Never print the key, copy it into this repo, or put it in the commit.
-   - Keep each response's `text` and discard the original. Split any body over 64 KiB.
-   - Probe the route first. If it does not answer, the response is not JSON with a `text` field, or any part fails, commit nothing and push nothing. Say to start the magpie-hostinger Magpie. Do not push the unmasked session and do not use another redactor.
-   - Write the masked text back to the transcript file named by `transcript_path` or `resolved_transcript_path` in the session JSON. If neither field is present, stop. Do not guess a path.
+6. Push the commit, then the session. Respect `strategy_options` in `.entire/settings.local.json`. Do not edit `.entire/settings.local.json` or `.entire/settings.json`. Do not stage `settings.local.json`.
 
-6. Commit with `git commit -m "<message>"`. If the hook asks whether to link this commit to session context, answer yes for this commit only. Do not change `commit_linking`. Confirm `git log -1 --format=%B` contains an `Entire-Checkpoint` trailer. If it does not, stop before any push and say the session was not linked.
-
-7. Push the commit, then the session. `push_sessions: false` in `.entire/settings.local.json` makes `git push` and `entire checkpoint push` leave checkpoints on this machine. This command is an explicit upload of this session, so:
-
-   - If that local value is false, or `checkpoint_push_disabled` is true because of it, set `strategy_options.push_sessions` to true in `.entire/settings.local.json` only for the upload. Do not stage or commit that file. Restore its exact previous bytes after the upload, including when a later step fails. If the file did not exist, remove only the key you added.
-   - Do not change `.entire/settings.json`.
+   - If `checkpoint_push_disabled` is true, stop and report it. Leave the commit local. Do not flip `push_sessions` to upload anyway.
    - Push the branch: `git push` when it has an upstream, otherwise `git push -u origin HEAD`. Never force-push.
    - Then run `entire checkpoint list --outgoing --json`. For each waiting checkpoint, run `entire checkpoint push <checkpoint-id>@<commit> --json`, using the `commit` that listing reports. Do not pass `--all`. If a result status is `changed`, list again and stop. Do not upload the new version without asking.
-   - If pushing is disabled for a reason other than `push_sessions`, stop and report it. Leave the commit local.
 
-8. Push or update the trail. Do not merge, approve, or mark it ready.
+7. Push or update the trail. Do not merge, approve, or mark it ready.
 
    - Run `entire trail show --json` for the current branch. Trail commands need network and keyring access; if the sandbox blocks either, re-run `entire trail` unsandboxed. Do not run `entire login`.
    - If this branch already has a trail, the push updated it. Do not create another. Report the change URL that `entire trail show` prints.
@@ -80,8 +69,6 @@ entire trail create --title "<title>" --type <feature|bug|task> --json
      `trail create` publishes the current branch and links it. Do not pass `--checkout`. If linking fails, retry with `entire trail link` as `entire agent-help trail link` describes. Do not create a second trail.
    - If this branch is the default branch, do not run `trail create`. That command derives a new branch from the title. Report that the commit and session were pushed and no trail was created.
 
-9. Restore `.entire/settings.local.json` if step 7 changed it.
-
-10. Report the commit SHA, the branch, the checkpoint id, whether the session upload succeeded, the trail URL, and that the session text was masked before it was committed. Do not include transcript text, tokens, or keys.
+8. Report the commit SHA, the branch, the checkpoint id, whether the session upload succeeded, and the trail URL. Do not include transcript text, tokens, or keys.
 
 Execute these steps and provide that summary.
