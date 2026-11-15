@@ -5,67 +5,67 @@
       "source": "vercel/ai-elements",
       "sourceType": "github",
       "skillPath": "skills/ai-elements/SKILL.md",
-      "computedHash": "7e81acdd3028bb68aa4387b2bd083c5812a50e2be1bea08c76994dcfb8f6a3d3"
+      "computedHash": "e92b5aca35680ce4a8ed672ae9d8d8b58335e7fd48e3321911590882a7e7f619"
     },
     "ai-sdk": {
       "source": "vercel/ai",
       "sourceType": "github",
       "skillPath": "skills/use-ai-sdk/SKILL.md",
-      "computedHash": "2249889eb47ef0f61c4dba4cf2afe01c1c8dd793bb4c24230347c1ab909bb7dd"
+      "computedHash": "59cd2dc82c5458f2819992fc3d27204ed16edfc9170870c6f8f04c44bac17772"
     },
     "cavecrew": {
       "source": "JuliusBrussee/caveman",
       "sourceType": "github",
       "skillPath": "skills/cavecrew/SKILL.md",
-      "computedHash": "505d836228d1c5e14834ff5d62aad72390c7d27f79c6aa7f9a7a55ed6606d6a2"
+      "computedHash": "e851caf8480d3ddf5de7fe490cbb2cda8840df760b3851510a24d605147d29e2"
     },
     "caveman": {
       "source": "JuliusBrussee/caveman",
       "sourceType": "github",
       "skillPath": "skills/caveman/SKILL.md",
-      "computedHash": "dfbf85749fd474feeb0bbe60c779795ecd5dbec0083299b56e68916bc3ddd8c9"
+      "computedHash": "b51af74aacdadbc3c2d6bb79f05db58dc521854b87f7ffabd48faf286a81ed31"
     },
     "caveman-commit": {
       "source": "JuliusBrussee/caveman",
       "sourceType": "github",
       "skillPath": "skills/caveman-commit/SKILL.md",
-      "computedHash": "f456ea0564875e46858890ac39ee701ecb9c601c72a2da1e6ce6bd5f9fc5d817"
+      "computedHash": "2c1472fb59eedd3cfba0b6512dc470a00287343ade421db55c21a6fb52afbe86"
     },
     "caveman-compress": {
       "source": "JuliusBrussee/caveman",
       "sourceType": "github",
       "skillPath": "skills/caveman-compress/SKILL.md",
-      "computedHash": "b8cbfec00b620f0944960a9bb4072f262cf816c1d3c82e6dbded35c30b4c5d0b"
+      "computedHash": "1f627a3ac239baa859918cf64a5e89619c162e1e9787c6d97ad41c5a1cc2fdb9"
     },
     "caveman-help": {
       "source": "JuliusBrussee/caveman",
       "sourceType": "github",
       "skillPath": "skills/caveman-help/SKILL.md",
-      "computedHash": "2c21437427e98df1eacabaa0b055b5256a308b2191feea3ca2df6a9418e76cb1"
+      "computedHash": "6a3e3d37fa03b4aa0622a6aec14446a243619c1539ad419e065dc8b1cd70aacd"
     },
     "caveman-review": {
       "source": "JuliusBrussee/caveman",
       "sourceType": "github",
       "skillPath": "skills/caveman-review/SKILL.md",
-      "computedHash": "fb7214a1c5793bae6ba8b1be4329e2e6f40dbec6dd911dfb335ad29f09c316a1"
+      "computedHash": "c55908f8ee0dca0e59690e939dfd4a877bd9361897ae5fced096274a77509154"
     },
     "caveman-stats": {
       "source": "JuliusBrussee/caveman",
       "sourceType": "github",
       "skillPath": "skills/caveman-stats/SKILL.md",
-      "computedHash": "47ce2de3d6cb39a75047b5c962e4eb3da15594e7397c94103e9a104d42626553"
+      "computedHash": "d47db80af9353f411b5840fa207ac10c883f04576cd280b135e3a44a0ff86285"
     },
     "cloudflare": {
       "source": "cloudflare/skills",
       "sourceType": "github",
       "skillPath": "skills/cloudflare/SKILL.md",
-      "computedHash": "ecc9c0211c605451f7e8b437724f84810fe013d5ca6c653c51d046139d4ecbf7"
+      "computedHash": "a40c5c77e4b96b0f6603a54e67bf2ff401a872366af48ff8f6ae0e872d4ad324"
     },
     "computer-use": {
       "source": "stablyai/orca",
       "sourceType": "github",
       "skillPath": "skills/computer-use/SKILL.md",
-      "computedHash": "860bbe08128588fa609083136fddd991d6806e021655328043cf1afddd5e3187"
+      "computedHash": "b7dff9dd91fb46b0b21c2309e8a0b400c3a71582ac267187d486e6f982d23446"
     },
     "gh-cli": {
       "source": "github/awesome-copilot",
@@ -77,49 +77,49 @@
       "source": "yusukebe/hono-skill",
       "sourceType": "github",
       "skillPath": "skills/hono/SKILL.md",
-      "computedHash": "220e5e1b12bbaeec49ec362b6e2262d77632d0536e9758bba9acbbc323fef990"
+      "computedHash": "95dda5b1d26017fca1376e0775712f114380057137c841f610c62f4b9a73ca78"
     },
     "lobstercash": {
       "source": "Crossmint/lobstercash-cli-skills",
       "sourceType": "github",
       "skillPath": "skills/SKILL.md",
-      "computedHash": "af3feaf0903b945d4cd3029614e2cc24e0928df0f65650f33fff8381cb581475"
+      "computedHash": "0173e45760456ba1199319769b5aae057a078eb66bc6efbbd82946f36202c5c3"
     },
     "mcporter": {
       "source": "steipete/clawdis",
       "sourceType": "github",
       "skillPath": "skills/mcporter/SKILL.md",
-      "computedHash": "ea5a58a5ab2f9b5927671cbabc7b4deb432e67e49faeb6a29d05ee9e1854b8c0"
+      "computedHash": "c98c709513c81011bd861f98fc57568b499f4d035f213b9ddde400d85eb065e1"
     },
     "orca-cli": {
       "source": "stablyai/orca",
       "sourceType": "github",
       "skillPath": "skills/orca-cli/SKILL.md",
-      "computedHash": "9223cd6820a9dbbf4132e8292b1ee4f8704e981b7746887a5ea3a14efacf05a6"
+      "computedHash": "aaf3ac336796b3d73563fe03f40ab159c4f5c0b04aabbd34306023fa72b8442b"
     },
     "react-devtools": {
       "source": "callstackincubator/agent-react-devtools",
       "sourceType": "github",
       "skillPath": "packages/agent-react-devtools/skills/react-devtools/SKILL.md",
-      "computedHash": "f914845954227725e3a2e8504e10779e79c1adde046b43c9046bf49e7ef262d1"
+      "computedHash": "664c19b07a10dbd4ca2d244f62d1375e7d8d3e2c4c955f7d8af6af3e701912bb"
     },
     "react-doctor": {
       "source": "posthog/posthog",
       "sourceType": "github",
       "skillPath": ".agents/skills/react-doctor/SKILL.md",
-      "computedHash": "acfe81f4b916b822e7a9e7be90e6a60a1b5b01779a8a5ee445e941c59638f917"
+      "computedHash": "2489089ee89d2700a4ea1932777dfbdd07d26b3b0213478d82445c3bf71cf6f3"
     },
     "skill-creator": {
       "source": "anthropics/skills",
       "sourceType": "github",
       "skillPath": "skills/skill-creator/SKILL.md",
-      "computedHash": "5ea13a6d9f0d4bb694405d79acd00cadec0d21bb138c4dd10fcf3c500cb835c2"
+      "computedHash": "2d7f889e6ae93c6c27d699856942c336b5b8644537496987d5571043d059b1dc"
     },
     "webauthx": {
       "source": "wevm/webauthx",
       "sourceType": "github",
       "skillPath": "SKILL.md",
-      "computedHash": "3b1eead0694dd14a8434f41ad471d50331a6323bc9f5ecfd7461ed5574a90d91"
+      "computedHash": "9da32d11ff5938b0568b18faa8320ade6fdd6c5600a70cb55d9f10cdb5dfc3c0"
     }
   }
 }

@@ -65,6 +65,8 @@ Output example:
 
 `⚠N` = N warnings, `✗N` = N errors. Returns "No components with errors or warnings" when everything is clean.
 
+When no React app is attached, this and every other tree observation command (`get tree`, `get component`, `find`, `count`, `profile start`) exits 1 with `No React app is attached to the DevTools daemon ...` instead of an empty result, so a missing app can never read as a clean pass.
+
 Error/warning annotations also appear in `get tree`, `get component`, and `find` output when counts are non-zero.
 
 ## Profiling
@@ -119,6 +121,11 @@ Categories with no changes are omitted. Keys are deduplicated across commits in 
 ## Setup
 
 ### `agent-react-devtools init [--dry-run]`
-Auto-detect the framework in the current directory and configure the devtools connection. Supports Vite, Next.js, CRA, and Expo/React Native.
+Auto-detect the framework in the current directory. It configures Vite, Next.js,
+CRA, and standard Expo/React Native projects automatically. For React Native it
+patches existing CommonJS Metro configs (or creates one), then adds the native
+bootstrap import to a recognized reachable app module. ESM, TypeScript, JSON or
+package-field Metro configs, custom `--config` use, and ambiguous targets are
+left unchanged with manual setup instructions.
 
 Use `--dry-run` to preview changes without writing files.

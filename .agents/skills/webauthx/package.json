@@ -1,0 +1,60 @@
+{
+  "scripts": {
+    "build": "zile",
+    "changeset:publish": "zile publish:prepare && changeset publish && zile publish:post",
+    "changeset:version": "changeset version",
+    "check": "oxlint --fix --ignore-pattern package.json && oxfmt",
+    "check:types": "tsc -b && pnpm --filter='*' --parallel --stream check:types",
+    "dev": "zile dev",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@changesets/cli": "catalog:",
+    "@types/node": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "playwright": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:",
+    "zile": "catalog:"
+  },
+  "packageManager": "pnpm@10.29.3",
+  "[!start-pkg]": "",
+  "name": "webauthx",
+  "type": "module",
+  "version": "0.1.2",
+  "main": "./dist/index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wevm/webauthx"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "dependencies": {
+    "ox": "~0.14.11"
+  },
+  "sideEffects": false,
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "src": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./client": {
+      "types": "./dist/client/index.d.ts",
+      "src": "./src/client/index.ts",
+      "default": "./dist/client/index.js"
+    },
+    "./server": {
+      "types": "./dist/server/index.d.ts",
+      "src": "./src/server/index.ts",
+      "default": "./dist/server/index.js"
+    }
+  }
+}
