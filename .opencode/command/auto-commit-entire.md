@@ -1,10 +1,12 @@
 ---
-description: Stage, commit, then push the commit, its Entire sessions, and a trail
+description: Stage, commit, then push the commit and its Entire sessions
 ---
 
-You are a Git and Entire automation assistant. Stage the current changes, commit them, and use the Entire CLI to push that commit, the session behind it, and a trail.
+You are a Git and Entire automation assistant. Stage the current changes, commit them, and use the Entire CLI to push that commit and one OpenCode session. Do not push, create, update, link, merge, approve, or mark a trail ready.
 
-Arguments: "$ARGUMENTS" — optional trail title. When empty, use the commit description.
+Arguments: "$ARGUMENTS" is the OpenCode session to attach. A bare id looks like `ses_…`. An OpenChamber link `openchamber://session/ses_…` means that same id. If the argument is empty, use `entire session current --json` only when `resolution` is `caller-env` or `ancestry`. Any other resolution is not a session you may attach: stop and ask for the session id. Do not guess one.
+
+The commit hook only links a session Entire already tracks as active. `entire session current` reporting no active session is normal for a session you pick. Do not stop for that. Attach the picked session yourself.
 
 The `entire` binary is the source of truth. If it is not on `PATH`, use `~/.local/bin/entire`. Before an unfamiliar subcommand, read `entire agent-help <command>`. If a flag below is rejected, use the installed help and do not guess. Pass `--json` on every command that supports it. Do not run `entire login`, `entire enable`, `entire disable`, or `entire configure`. If Entire is disabled or the CLI says you are not signed in, stop and say what is missing.
 
@@ -48,27 +50,21 @@ Rules:
 8. Never add `Made-with: Cursor`
 9. For a breaking change, add `!` after the type or scope and a `BREAKING CHANGE:` footer
 
-5. Commit with `git commit -m "<message>"`. If the hook asks whether to link this commit to session context, answer yes for this commit only. Do not change `commit_linking`. Confirm `git log -1 --format=%B` contains an `Entire-Checkpoint` trailer. If it does not, stop before any push and say the session was not linked.
+5. Commit with `git commit -m "<message>"`. If the hook asks whether to link this commit to session context, answer yes for this commit only. Do not change `commit_linking`. A missing `Entire-Checkpoint` trailer is not a failure yet. Remember the new commit SHA.
 
-6. Push the commit, then the session. Respect `strategy_options` in `.entire/settings.local.json`. Do not edit `.entire/settings.local.json` or `.entire/settings.json`. Do not stage `settings.local.json`.
+6. Attach the picked session to that commit before any push. The commit is still local, so attach can add the trailer. Use `--agent opencode`.
+
+   - Run `entire session attach <session-id> --agent opencode` with no `--force`. It prints the plan and changes nothing.
+   - Pass `--force` only when that plan does one of these to the commit this command just created, and nothing else: add the `Entire-Checkpoint` trailer to that unpushed commit, or add this session to the checkpoint that commit already has.
+   - If the plan rewrites a commit that is already pushed, rewrites any commit other than the one just created, or names a different commit, stop and show the plan. Do not pass `--force`.
+   - After a forced attach, confirm `git log -1 --format=%B` contains an `Entire-Checkpoint` trailer, or that attach added the session to the existing checkpoint. If neither happened, stop before any push.
+
+7. Push the commit, then the session. Respect `strategy_options` in `.entire/settings.local.json`. Do not edit `.entire/settings.local.json` or `.entire/settings.json`. Do not stage `settings.local.json`.
 
    - If `checkpoint_push_disabled` is true, stop and report it. Leave the commit local. Do not flip `push_sessions` to upload anyway.
    - Push the branch: `git push` when it has an upstream, otherwise `git push -u origin HEAD`. Never force-push.
    - Then run `entire checkpoint list --outgoing --json`. For each waiting checkpoint, run `entire checkpoint push <checkpoint-id>@<commit> --json`, using the `commit` that listing reports. Do not pass `--all`. If a result status is `changed`, list again and stop. Do not upload the new version without asking.
 
-7. Push or update the trail. Do not merge, approve, or mark it ready.
-
-   - Run `entire trail show --json` for the current branch. Trail commands need network and keyring access; if the sandbox blocks either, re-run `entire trail` unsandboxed. Do not run `entire login`.
-   - If this branch already has a trail, the push updated it. Do not create another. Report the change URL that `entire trail show` prints.
-   - If it has no trail and this branch is not the default branch (`origin/HEAD`), create one. Map `feat` to `--type feature`, `fix` to `--type bug`, and anything else to `--type task`. Title is "$ARGUMENTS" when it is non-empty, otherwise the commit description.
-
-```bash
-entire trail create --title "<title>" --type <feature|bug|task> --json
-```
-
-     `trail create` publishes the current branch and links it. Do not pass `--checkout`. If linking fails, retry with `entire trail link` as `entire agent-help trail link` describes. Do not create a second trail.
-   - If this branch is the default branch, do not run `trail create`. That command derives a new branch from the title. Report that the commit and session were pushed and no trail was created.
-
-8. Report the commit SHA, the branch, the checkpoint id, whether the session upload succeeded, and the trail URL. Do not include transcript text, tokens, or keys.
+8. Report the commit SHA, the branch, the session id, the checkpoint id, and whether the session upload succeeded. Do not include transcript text, tokens, or keys.
 
 Execute these steps and provide that summary.
