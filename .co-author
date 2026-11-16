@@ -1,0 +1,6 @@
+# One co-author per line. A line that starts with # is not added.
+# An empty file, or a file whose lines are all comments, adds no co-author.
+# Co-authored-by: is added when the line does not already start with it.
+
+# Co-authored-by: Cursor <cursoragent@cursor.com>
+Co-authored-by: opencode-agent[bot] <219766164+opencode-agent[bot]@users.noreply.github.com>
